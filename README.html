@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+
+ <title>JPG RSS Plugin Readme</title>
+ 
+ <style type="text/css"> 
+	body { 
+		font: 13px/19px "Trebuchet MS", Arial, sans-serif; 
+		background:#556;
+		margin:0;
+	}
+	a { text-decoration: none; }
+	a:hover { border-bottom: 1px solid; }
+	p { margin:0 0 1em; }
+	h2,h3 { margin:1.5em 0 0.5em; }
+	textarea { background:#f8f8f8; } 
+	textarea:focus { background:#fff; }
+	code { color:#906; }
+	#content-wraper { width:600px; padding: 30px 65px; background:#fff; border-right:2px solid #444; }
+	.copy { color:#c88; }
+ </style>
+ 
+</head>
+
+<body>
+	<div id="content-wraper">
+		<h1>JPG RSS Plugin Readme</h1>
+		
+		<p>This plugin allows you to display images uploaded to <a href="http://jpgmag.com">JPGMag.com</a> on your WordPress site.  It uses MagpieRSS to parse the RSS feed and display the images.</p>
+		
+		<h2>Credits</h2>
+		<p>jpgrss is a modification of the flickrRSS plugin by <a href="http://eightface.com" title="Dave Kellam">Dave Kellam (aka: EightFace)</a>.</p>
+		
+		<h2>Features</h2>
+		<ul>
+			<li>Able to use multiple instances.</li>
+			<li>Specify image size.</li>
+			<li>Specify the number of images to display.</li>
+			<li>Specify feed URL (eg: favorites, newly submited, etc.)</li>
+			<li>Local image caching and cache removal.</li>
+		</ul>
+		
+		<h2>Installation</h2>
+		<ol>
+			<li>Put jpgrss.php in your plugins directory</li>
+			<li>If you want to cache images, create a directory and make it writable</li>
+			<li>Activate the plugin</li> 
+			<li>Configure your settings via the JPG RSS panel in Options</li>
+			<li>Add <code>&lt;?php get_jpgrss(); ?&gt;</code> somewhere in your templates</li>
+		</ol>
+		
+		
+		<h2>FAQ</h2>
+		<ol>
+			<li><strong>Is there a list of JPG Feeds?</strong><br />
+				<a href="http://jpgmag.com/blog/2007/04/jpg_loves_rss.html" title="JPG RSS Feeds">Article: JPG Loves RSS</a><br />
+				<br />
+				<strong>Photos:</strong><br />
+				<a href="http://jpgmag.com/stories/rss">http://jpgmag.com/photos/rss</a><br />
+				<a href="http://jpgmag.com/photos/submitted/rss">http://jpgmag.com/photos/submitted/rss</a><br />
+				<a href="http://jpgmag.com/photos/published/rss">http://jpgmag.com/photos/published/rss</a><br />
+				<br />
+				<strong>Themes:</strong><br />
+				<a href="http://jpgmag.com/themes/14/rss">http://jpgmag.com/themes/<em>THEME_ID</em>/rss</a><br />
+				<br />
+				<strong>People:</strong><br />
+				<a href="http://jpgmag.com/people/eightface/photos/rss">http://jpgmag.com/people/<em>USER_NAME</em>/photos/rss</a><br />
+			</li>
+		</ol>
+		
+		
+		<h2>Advanced</h2>
+		
+		<p>The plugin also supports a number of parameters, allowing you to have multiple instances across your site.</p>
+		
+		<ol>
+			<li><code>$num_items</code> - how many photos you want to appear. (max. 25)</li>
+			<li><code>$rss_url</code> - Feed URL (see above)</li>
+			<li><code>$imagesize</code> - small, medium or large</li>
+			<li><code>$before_image</code> - html appearing before each photo (eg: &lt;li class="jpg-img"&gt;)</li>
+			<li><code>$after_image</code> - html appearing after each photo (eg: &lt;/li&gt;)</li>
+		</ol>
+		
+		<h3>Example 1</h3>
+		<textarea id="example1" readonly="readonly" rows="10" cols="70">
+		<?php
+		$getArgs = array('num_items'=>6,
+					   'rss_url'=>'http://jpgmag.com/photos/rss',
+					   'image_size'=>'small',
+					   'before_image'=>'<li class="jpg-thumb">',
+					   'after_image'=>'</li>');
+		
+		get_jpgrss($getArgs); 
+		?></textarea>
+		<p class="copy"><a onclick="document.getElementById('example1').focus(); document.getElementById('example1').select();">Copy code</a></p>
+		<p>This would show 6 small photos recently added to JPGMag.com wrapped in list tags with the class "jpg-thumb". If any of the above parameters (ie: <code>$imagesize</code>) are omitted, the plugin will default to the configuration value(s) set via the Admin Options page.</p>
+		
+		
+		<h3>Example 2</h3>
+		<textarea id="example2" readonly="readonly" rows="10" cols="70">
+		<?php
+		$getArgs = array('num_items'=>6,
+					   'rss_url'=>'http://jpgmag.com/photos/submitted/rss',
+					   'image_size'=>'medium',
+					   'before_image'=>'<li class="jpg-medium">',
+					   'after_image'=>'</li>');
+		
+		get_jpgrss($getArgs); 
+		?></textarea>
+		<p class="copy"><a onclick="document.getElementById('example2').focus(); document.getElementById('example2').select();">Copy code</a></p>
+		<p>This would show 6 medium sized images, wrapped in list tags with the class "jpg-medium", submitted for publication consideration.</p>
+		
+		
+		<h2>Feedback and Support</h2>
+		<p>Thanks and gratuities go to <a href="http://eightface.com/">Dave Kellam (aka: EightFace)</a></p>
+		<p>For support and inquiries, you can find me at <a href="http://www.invalidresponse.com">http://www.invalidresponse.com</a></p>
+		<hr />
+		
+		<h2>Plugin History</h2>
+		<p><strong>Latest Release:</strong> April 28<sup>th</sup> 2006</p>
+		<ul>
+			<li>v1.0 - Initial release</li>
+		</ul>
+	</div>
+</body>
+</html>
